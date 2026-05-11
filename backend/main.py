@@ -32,6 +32,7 @@ def _run_db_migrations():
     tasks_existing = {c["name"] for c in insp.get_columns("tasks")}
     task_migrations = {
         "assigned_to": "ALTER TABLE tasks ADD COLUMN assigned_to VARCHAR",
+        "created_at": "ALTER TABLE tasks ADD COLUMN created_at DATETIME DEFAULT CURRENT_TIMESTAMP",
     }
 
     # Create telegram_users table if missing
