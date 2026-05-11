@@ -222,6 +222,7 @@ copy .env.example .env
 ```powershell
 cd frontend
 npm install
+node node_modules/.bin/vite
 ```
 
 ### 4. Çalıştır
@@ -235,7 +236,7 @@ npm install
 ```powershell
 # Terminal 1 — Backend
 cd backend
-venv\Scripts\python.exe -m uvicorn main:app --reload
+.\venv\Scripts\python.exe -m uvicorn main:app --reload
 
 # Terminal 2 — Frontend
 cd frontend
