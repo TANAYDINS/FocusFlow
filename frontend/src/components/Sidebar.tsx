@@ -1,72 +1,88 @@
 import { NavLink } from 'react-router-dom';
-import { 
-  HomeIcon, 
-  ClipboardDocumentCheckIcon, 
-  SparklesIcon, 
-  ChartBarIcon, 
-  Cog6ToothIcon 
+import {
+  HomeIcon,
+  ClipboardDocumentCheckIcon,
+  SparklesIcon,
+  ChartBarIcon,
+  Cog6ToothIcon,
+  UserGroupIcon,
+  ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/outline';
-import { motion } from 'framer-motion';
 
-const Sidebar = () => {
-  const navItems = [
-    { name: 'Dashboard', path: '/', icon: HomeIcon },
-    { name: 'Tasks', path: '/tasks', icon: ClipboardDocumentCheckIcon },
-    { name: 'AI Planner', path: '/planner', icon: SparklesIcon },
-    { name: 'Analytics', path: '/analytics', icon: ChartBarIcon },
-    { name: 'Settings', path: '/settings', icon: Cog6ToothIcon },
-  ];
+const navItems = [
+  { name: 'Kontrol Paneli', path: '/', icon: HomeIcon },
+  { name: 'Görevler', path: '/tasks', icon: ClipboardDocumentCheckIcon },
+  { name: 'YZ Planlayıcı', path: '/planner', icon: SparklesIcon },
+  { name: 'İş Dağılımı', path: '/workflow', icon: UserGroupIcon },
+  { name: 'YZ Asistanı', path: '/assistant', icon: ChatBubbleLeftRightIcon },
+  { name: 'Analiz', path: '/analytics', icon: ChartBarIcon },
+  { name: 'Ayarlar', path: '/settings', icon: Cog6ToothIcon },
+];
 
-  return (
-    <aside className="w-64 glass-card m-4 mr-0 flex flex-col h-[calc(100vh-2rem)] relative z-10">
-      <div className="p-6 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
-          <SparklesIcon className="w-6 h-6 text-background" />
-        </div>
-        <h1 className="text-xl font-bold tracking-tight text-gradient">FocusFlow</h1>
+const Sidebar = () => (
+  <aside className="w-60 bg-white border-r border-border flex flex-col h-screen sticky top-0 z-20">
+    {/* Logo */}
+    <div className="px-5 py-5 flex items-center gap-3 border-b border-border">
+      <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10 flex-shrink-0">
+        <defs>
+          <linearGradient id="logo-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#4F46E5"/>
+            <stop offset="100%" stopColor="#7C3AED"/>
+          </linearGradient>
+        </defs>
+        {/* Background */}
+        <rect width="40" height="40" rx="11" fill="url(#logo-grad)"/>
+        {/* Focus reticle — 4 corner brackets */}
+        <path d="M12 17 L12 12 L17 12" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M23 12 L28 12 L28 17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M12 23 L12 28 L17 28" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M23 28 L28 28 L28 23" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        {/* Center dot */}
+        <circle cx="20" cy="20" r="3" fill="white"/>
+        {/* AI spark */}
+        <circle cx="29" cy="11" r="2" fill="#F59E0B"/>
+      </svg>
+      <div>
+        <span className="text-[15px] font-bold text-dark tracking-tight">FocusFlow</span>
+        <span className="block text-[9px] font-bold text-primary tracking-[0.15em] uppercase mt-0.5">AI Asistan</span>
       </div>
+    </div>
 
-      <nav className="flex-1 px-4 py-6 space-y-2">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.path}
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 relative group overflow-hidden ${
-                isActive ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
-              }`
-            }
-          >
-            {({ isActive }) => (
-              <>
-                {isActive && (
-                  <motion.div
-                    layoutId="active-nav"
-                    className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent border-l-2 border-primary"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  />
-                )}
-                <item.icon className={`w-5 h-5 relative z-10 ${isActive ? 'text-primary' : 'group-hover:text-primary transition-colors'}`} />
-                <span className="font-medium relative z-10">{item.name}</span>
-              </>
-            )}
-          </NavLink>
-        ))}
-      </nav>
+    {/* Nav */}
+    <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+      {navItems.map(({ name, path, icon: Icon }) => (
+        <NavLink key={path} to={path} end={path === '/'}
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
+              isActive
+                ? 'bg-primary/10 text-primary'
+                : 'text-muted hover:bg-slate-50 hover:text-dark'
+            }`
+          }
+        >
+          {({ isActive }) => (
+            <>
+              <Icon className={`w-4.5 h-4.5 flex-shrink-0 ${isActive ? 'text-primary' : 'text-slate-400'}`} style={{width:'1.125rem',height:'1.125rem'}} />
+              {name}
+            </>
+          )}
+        </NavLink>
+      ))}
+    </nav>
 
-      <div className="p-4 mt-auto">
-        <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gray-700 flex-shrink-0"></div>
-          <div>
-            <p className="text-sm font-medium text-white">John Doe</p>
-            <p className="text-xs text-gray-400">Pro Plan</p>
-          </div>
+    {/* User */}
+    <div className="p-3 border-t border-border">
+      <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-50">
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+          FF
+        </div>
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-dark truncate">FocusFlow Kullanıcı</p>
+          <p className="text-[10px] text-muted">Premium Plan</p>
         </div>
       </div>
-    </aside>
-  );
-};
+    </div>
+  </aside>
+);
 
 export default Sidebar;

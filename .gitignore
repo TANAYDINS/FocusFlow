@@ -1,4 +1,67 @@
+# ═══════════════════════════════════════════════
+#  FocusFlow AI — .gitignore
+# ═══════════════════════════════════════════════
+
+# ── Güvenlik (ASLA commit etme!) ────────────────
+backend/.env
 .env
-venv
+.env.*
+!.env.example        # örnek dosya takip edilir
+*.pem
+*.key
+*.p12
+
+# ── Python ──────────────────────────────────────
 __pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# Virtual environment
+backend/venv/
+venv/
+.venv/
+env/
+
+# ── Veritabanı ───────────────────────────────────
+backend/focusflow.db
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Node / Frontend ──────────────────────────────
+frontend/node_modules/
 node_modules/
+frontend/dist/
+dist/
+.npm
+
+# ── IDE / Editor ─────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Loglar ───────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+pip-log.txt
+
+# ── Claude Code ──────────────────────────────────
+.claude/
+
+# ── Test / Debug çıktıları ───────────────────────
+scratch/
+*.output
+debug_*.py
+debug_*.txt
