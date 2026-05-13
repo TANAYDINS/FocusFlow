@@ -69,19 +69,6 @@ const Sidebar = () => (
         </NavLink>
       ))}
     </nav>
-
-    {/* User */}
-    <div className="p-3 border-t border-border">
-      <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-50">
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-          FF
-        </div>
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-dark truncate">FocusFlow Kullanıcı</p>
-          <p className="text-[10px] text-muted">Premium Plan</p>
-        </div>
-      </div>
-    </div>
   </aside>
 );
 

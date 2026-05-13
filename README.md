@@ -210,11 +210,15 @@ cd backend
 
 # Sanal ortam oluştur ve bağımlılıkları yükle
 python -m venv venv
-venv\Scripts\python.exe -m pip install -r requirements.txt
+venv\Scripts\python.exe -m pip install -r requirements.txt #windows
+source venv\bin\activate #macos
 
 # Ortam değişkenlerini ayarla
 copy .env.example .env
 # .env dosyasını düzenle → OPENAI_API_KEY değerini gir
+
+#backend çalıştır
+uvicorn main:app --reload
 ```
 
 ### 3. Frontend Kurulumu
@@ -222,26 +226,9 @@ copy .env.example .env
 ```powershell
 cd frontend
 npm install
-node node_modules/.bin/vite
-```
-
-### 4. Çalıştır
-
-**Tek komutla (Windows):**
-```powershell
-.\start.bat
-```
-
-**Manuel:**
-```powershell
-# Terminal 1 — Backend
-cd backend
-.\venv\Scripts\python.exe -m uvicorn main:app --reload
-
-# Terminal 2 — Frontend
-cd frontend
 npm run dev
 ```
+
 
 | Servis | URL |
 |--------|-----|
@@ -262,8 +249,6 @@ OPENAI_API_KEY=sk-proj-...
 # Opsiyonel — Telegram bot aktif etmek için
 TELEGRAM_BOT_TOKEN=
 ```
-
-> ⚠️ `.env` dosyası `.gitignore` ile korunmaktadır, **asla commit etmeyin.**
 
 ---
 
@@ -366,29 +351,7 @@ Bot: 👤 Ahmet'e iş atandı ✅
 | qrcode.react | — | QR kod üretimi |
 | Heroicons | v2 | İkon seti |
 
----
 
-## 🔒 Güvenlik
-
-- `backend/.env` → `.gitignore` ile git'ten dışlanmıştır
-- `backend/venv/` ve `frontend/node_modules/` takip edilmez
-- `.vscode/` workspace ayarları takip edilmez
-- API anahtarlarını kaynak koduna **asla** yazmayın
-- Üretimde CORS ayarlarını kısıtlayın (`main.py`)
-- Üretim ortamı için SQLite yerine **PostgreSQL** önerilir
-
----
-
-## 🗺️ Yol Haritası
-
-- [ ] Çok kullanıcılı auth sistemi (JWT)
-- [ ] PostgreSQL desteği
-- [ ] Mobil uygulama (React Native)
-- [ ] Takvim senkronizasyonu (Google Calendar)
-- [ ] E-posta entegrasyonu
-- [ ] Haftalık AI raporu
-
----
 
 <div align="center">
 
