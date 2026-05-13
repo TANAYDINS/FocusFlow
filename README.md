@@ -210,7 +210,8 @@ cd backend
 
 # Sanal ortam oluştur ve bağımlılıkları yükle
 python -m venv venv
-venv\Scripts\python.exe -m pip install -r requirements.txt #windows
+pip install -r requirement.txt
+.\venv\Scripts\activate #windows
 source venv\bin\activate #macos
 
 # Ortam değişkenlerini ayarla
